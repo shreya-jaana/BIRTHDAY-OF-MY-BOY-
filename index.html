@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jaana ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+}
+
+.section{
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+position:absolute;
+top:0;
+left:100%;
+transition:1s ease;
+}
+
+.active{
+left:0;
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:40px;
+margin-bottom:20px;
+color:#fff;
+}
+
+p{
+max-width:700px;
+color:#fff;
+font-size:18px;
+line-height:1.6;
+margin-bottom:25px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#fff;
+color:#ee9ca7;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* GAME */
+#gameBox{
+width:250px;
+height:250px;
+background:#fff;
+border-radius:20px;
+position:relative;
+overflow:hidden;
+}
+
+#heart{
+position:absolute;
+font-size:30px;
+cursor:pointer;
+}
+
+/* GIFTS */
+.gifts{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-top:20px;
+}
+
+.gift{
+background:white;
+padding:20px;
+border-radius:15px;
+color:#ee9ca7;
+font-weight:600;
+transition:0.3s;
+}
+
+.gift:hover{
+transform:scale(1.1);
+}
+
+/* FINAL */
+#final h1{
+font-size:50px;
+}
+
+.zoom{
+animation:zoomIn 3s forwards;
+}
+
+@keyframes zoomIn{
+from{transform:scale(1);}
+to{transform:scale(1.5);}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="section active" id="intro">
+<h1>Happy Birthday My Jaana ❤️</h1>
+<p>
+On this special day, I just want to tell you how much you mean to me.  
+You are not just my love, you are my happiness, my peace, my safe place.  
+Every smile of yours makes my world brighter.  
+Every hug feels like home.  
+Today is all about celebrating you, jaana — the most special person in my life.  
+I am so lucky to have you.  
+</p>
+<button onclick="nextPage('game')">Start Your Surprise 🎁</button>
+</div>
+
+<!-- PAGE 2 GAME -->
+<div class="section" id="game">
+<h1>Catch My Love 💖</h1>
+<p>Catch the heart 5 times to unlock your gifts!</p>
+<div id="gameBox">
+<div id="heart">❤️</div>
+</div>
+<p id="score">Score: 0</p>
+</div>
+
+<!-- PAGE 3 GIFTS -->
+<div class="section" id="gifts">
+<h1>Your 4 Special Gifts 🎁</h1>
+<div class="gifts">
+<div class="gift">Gift 1 💌<br>You have my heart forever.</div>
+<div class="gift">Gift 2 🌹<br>Unlimited hugs and kisses.</div>
+<div class="gift">Gift 3 💖<br>Lifetime of love with me.</div>
+<div class="gift">Gift 4 🌎<br>Adventures together always.</div>
+</div>
+<br>
+<button onclick="nextPage('final')">Last Surprise 💋</button>
+</div>
+
+<!-- PAGE 4 FINAL -->
+<div class="section" id="final">
+<h1>Come Close… 💋</h1>
+<p>I have one more thing for you, jaana...</p>
+<h1 class="zoom">Muahhhh 😘</h1>
+</div>
+
+<script>
+function nextPage(id){
+document.querySelectorAll('.section').forEach(sec=>{
+sec.classList.remove('active');
+});
+document.getElementById(id).classList.add('active');
+}
+
+/* GAME LOGIC */
+let heart=document.getElementById("heart");
+let score=0;
+let scoreText=document.getElementById("score");
+let box=document.getElementById("gameBox");
+
+function moveHeart(){
+let x=Math.random()*(box.clientWidth-30);
+let y=Math.random()*(box.clientHeight-30);
+heart.style.left=x+"px";
+heart.style.top=y+"px";
+}
+moveHeart();
+
+heart.addEventListener("click",()=>{
+score++;
+scoreText.innerText="Score: "+score;
+moveHeart();
+if(score==5){
+setTimeout(()=>{
+nextPage('gifts');
+},500);
+}
+});
+</script>
+
+</body>
+</html>
